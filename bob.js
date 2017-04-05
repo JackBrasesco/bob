@@ -1,9 +1,7 @@
 //Copyright (c) 2016 Jack Brasesco All Rights Reserved.
 
 //////////////////THINGS TO ADD///////////////////////
-//               MAKE SIGN IN WORK                  //
 //                    NOTES                         //
-//                VOICE CONTROL                     //
 //////////////////////////////////////////////////////
 
 var input = $("#main-input-field");
@@ -160,6 +158,9 @@ var signInPasswordInput = $("#sign-in-password-input");
 var signInButton = $("#sign-in-button");
 var error1 = $("#error1");
 
+if (localStorage.getItem("loggedIn") == "true") {
+  profile.username = localStorage.getItem("username")
+}
 function signin(inputedUsername, inputedPassword) {
   signInUsernameInput.val("")
   signInPasswordInput.val("")
@@ -167,6 +168,8 @@ function signin(inputedUsername, inputedPassword) {
     if (password == inputedPassword) {
       console.log(inputedUsername)
       profile.username = inputedUsername;
+      localStorage.setItem("loggedIn", "true");
+      localStorage.setItem("username", inputedUsername)
     } else {
       error1.css("display", "block")
       error1.html("The username and password do not match")
@@ -229,7 +232,7 @@ function bob(entry) {
       profile.food = entry
     }
 
-    addListItem(profile.username, favoriteFood)
+    storeValue((profile.username) + ",,,,Food", favoriteFood)
     waitingForFavoriteFood = "false"
     output.html("yum")
   }
@@ -642,11 +645,25 @@ function bob(entry) {
     return
   }
 }
-  //ABOUT BOB ------------------------------------------------------------------
+  //WHAT ------------------------------------------------------------------
   var isWhatQuestion = entry.indexOf(" what ")
   if (isWhatQuestion > -1) {
+    var isAboutUser = entry.indexOf(" my ")
     var isAboutBob = entry.indexOf(" your ")
     var isFoxxy = entry.indexOf(" fox say")
+    if (isAboutUser > -1) {
+      var isUserName = entry.indexOf(" name")
+      var isUserFood = entry.indexOf(" food")
+      if (isUserName > -1) {
+        output.html(profile.username)
+        return
+      }
+      if (isUserFood > -1) {
+        once(profile.username + ",,,,Food", function(lfkja) {
+          output.html(lfkja + "but it's not as cool as my favorite food")
+        })
+      }
+    }
     if (isFoxxy > -1) {
       output.html("fraka-kaka-kaka-kaka-kow")
       return "hatee - hatee - hatee - HO"
