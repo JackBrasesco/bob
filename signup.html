@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.0.4/firebase.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="signup.css" />
+  </head>
+  <body>
+    <h1 id="main-title"> Sign In </h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4" id="main-field">
+          <div id="error2"></div>
+          <input id="sign-up-username-input" class="input-field" type="text" placeholder="Create a username"/>
+          <input id="sign-up-password-1-input" class="input-field" type="password" placeholder="Create a password"/>
+          <input id="sign-up-password-2-input" class="input-field" type="password" placeholder="Cornfirm your password"/>
+          <input type="button" id="create-account-button" value="Create Account" />
+        </div>
+        <div class="col-lg-4"></div>
+      </div>
+      <div class="row">
+          <a id="back-button" class="btn btm-btn" href="file:///Users/jacbras/Documents/src/web/proj_bob3/sign.html"> Back </a>
+          <a  id="sign-in-button" class="btn btm-btn" href="file:///Users/jacbras/Documents/src/web/proj_bob3/index.html"> Bob </a>
+      </div>
+    </div>
+    <script src="bob.js"></script>
+    <script src="firebase-config.js"></script>
+  </body>
+</html>

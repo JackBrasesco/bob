@@ -1,0 +1,56 @@
+.btm-btn {
+  position: relative;
+  display: inline;
+  width: 100px;
+  height: 25px;
+  background-color: white;
+  bottom: -200px;
+  margin-left: 50px;
+}
+#main-title {
+  box-shadow: 0 0 1em 1em #ccc;
+  text-align: center;
+  color: white;
+  background-color: lightslategrey
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Corben', Georgia, Times, serif;
+}
+p, div {
+    font-family: 'Nobile', Helvetica, Arial, sans-serif;
+}
+h1 {
+    text-shadow: 1px 1px 1px #ccc;
+}
+body {
+  background-image: url("file:///Users/jacbras/Documents/src/web/proj_bob3/imgres-1.jpg");
+}
+#main-field {
+  border: 1px lightgrey solid;
+  box-shadow: 0 0 1em 1em #ccc;
+  position: relative;
+  top: 150px;
+  height: 350px;
+  margin-top: -50px;
+  background-color: white;
+}
+
+.input-field {
+  width: 250px;
+  margin-left: 50px;
+  height: 35px;
+  display: block;
+  margin-top: 30px;
+}
+#back-button {
+  margin-left: 435px;
+}
+#create-account-button {
+  margin-top: 35px;
+  width: 150px;
+  margin-left: 100px;
+}
+#error2 {
+  color: red;
+  display: none;
+}

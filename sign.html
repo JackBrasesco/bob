@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.0.4/firebase.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="sign.css" />
+  </head>
+  <body>
+    <h1 id="main-title"> Sign In </h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4" id="main-field">
+          <div id="error1"></div>
+          <input id="sign-in-username-input" class="input-field" type="text" placeholder="Username"/>
+          <input id="sign-in-password-input" class="input-field" type="password" placeholder="Password"/>
+          <input type="button" id="sign-in-button" value="sign-in" />
+          <a id="sign-up-button" href="file:///Users/jacbras/Documents/src/web/proj_bob3/signup.html"> Don't have an account? sign up!</a>
+        </div>
+        <div class="col-lg-4"></div>
+      </div>
+      <div class="row">
+          <a id="back-button" class="btn btm-btn" href="file:///Users/jacbras/Documents/src/web/proj_bob3/index.html"> Back </a>
+          <a  id="sign-in-button" class="btn btm-btn" href="file:///Users/jacbras/Documents/src/web/proj_bob3/help.html"> Help </a>
+        </div>
+    </div>
+    <script src="bob.js"></script>
+    <script src="firebase-config.js"></script>
+  </body>
+</html>
