@@ -705,7 +705,7 @@ function bob(entry) {
 
 var commands = {
   'hey bob *thing': function(thing) {
-   var entry = (" " + thing)
+   var entry = (" " + thing.toLowerCase())
   bob(entry)
 }
 }
