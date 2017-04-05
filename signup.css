@@ -23,7 +23,7 @@ h1 {
     text-shadow: 1px 1px 1px #ccc;
 }
 body {
-  background-image: url("file:///Users/jacbras/Documents/src/web/proj_bob3/imgres-1.jpg");
+  background-image: url("imgres-1.jpg");
 }
 #main-field {
   border: 1px lightgrey solid;
