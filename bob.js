@@ -208,6 +208,7 @@ function awaitResponseColor() {
 }
 ///START OF THE FUCTION \/\/\/\/\/\/\//\/\/\/\/\/\//\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 function bob(entry) {
+  console.log(entry)
   output.html("")
   input.val("")
   var isNegitive = entry.indexOf("not");
