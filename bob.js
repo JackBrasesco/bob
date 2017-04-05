@@ -704,7 +704,8 @@ function bob(entry) {
 }
 
 var commands = {
-  'hey bob *entry': function(entry) {
+  'hey bob *thing': function(thing) {
+   var entry = (" " + thing)
   bob(entry)
 }
 }
