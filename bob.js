@@ -1,9 +1,5 @@
 //Copyright (c) 2016 Jack Brasesco All Rights Reserved.
 
-//////////////////THINGS TO ADD///////////////////////
-//                    NOTES                         //
-//////////////////////////////////////////////////////
-
 var input = $("#main-input-field");
 var output = $("#main-output");
 var title = $("#main-title")
@@ -316,6 +312,53 @@ function bob(entry) {
     openInNewTab("https://www.google.com/search?q=" + thing_to_search);
     return "done!"
   }
+
+  //NOTES ----------------------------------------------------------------------
+  var isRemind = entry.indexOf(" remind")
+  if (isRemind > -1) {
+    if (localStorage.getItem("loggedIn") == "true") {
+    var what_to_remind = entry.split("to ")[1]
+    once(profile.username + ",,,,Notes", function(currentNotes) {
+    storeValue(profile.username + ",,,,Notes", currentNotes + what_to_remind + "0111001")
+    })
+    return
+  } else {
+    output.html("you must be logged in to store notes. . .")
+    return
+  }
+  }
+  var isAddNote = entry.indexOf(" notes")
+  if (isAddNote > -1) {
+    if (localStorage.getItem("loggedIn") == "true") {
+    var isMyNotes = entry.indexOf(" my notes")
+    var isAddNotes = entry.indexOf(" add ")
+    if (isAddNotes > -1) {
+      var thing_to_notes_1 = entry.split("add ")[1]
+      if (isMyNotes > -1) {
+        var thing_to_notes_2 = thing_to_notes_1.split(" to my notes")[0]
+      } else {
+        thing_to_notes_2 = thing_to_notes_1.split(" to notes")[0]
+      }
+      once(profile.username + ",,,,Notes", function(currentNotes) {
+      storeValue(profile.username + ",,,,Notes", currentNotes + thing_to_notes_2 + "0111001")
+      })
+      return
+    }
+  }
+  }
+  //Delete a note ???!?!??!?!??!?!?!?!??!?!?!??!?!??!
+  var isDelete = entry.indexOf(" delete ")
+  if (isDelete > -1) {
+    var isDeleteNote = entry.indexOf(" note ")
+    if (isDeleteNote > -1) {
+      var note_to_delete = (parseInt(entry.split("note ")[1]) - 1)
+      once(profile.username + ",,,,Notes", function(notes) {
+        var part_to_delete = notes.split("0111001")[note_to_delete]
+        var newNotes = notes.replace(part_to_delete + "0111001", "")
+        storeValue(profile.username + ",,,,Notes", newNotes)
+      })
+    }
+  }
   //MATH -----------------------------------------------------------------------
   var isAdd = entry.indexOf(" add ")
   var isMultiply = entry.indexOf(" multiply ")
@@ -401,6 +444,7 @@ function bob(entry) {
     output.html(problem_to_solve + " is equal to " + finalNumber)
     memory = (problem_to_solve + "is equal to" + finalNumber)
   }
+
   //SET ------------------------------------------------------------------------
   var isSet = entry.indexOf(" set ")
   var isAlarm = entry.indexOf(" alarm ")
@@ -645,12 +689,42 @@ function bob(entry) {
     return
   }
 }
+  //Thanks ----------------------------------------------------------------
+  var isThanks = entry.indexOf(" thanks")
+  if (isThanks > -1) {
+    output.html("you're welcome!")
+  }
+  var isThankYou = entry.indexOf(" thank you")
+  if (isThankYou > -1) {
+    output.html("you're welcome!")
+  }
   //WHAT ------------------------------------------------------------------
   var isWhatQuestion = entry.indexOf(" what ")
   if (isWhatQuestion > -1) {
     var isAboutUser = entry.indexOf(" my ")
     var isAboutBob = entry.indexOf(" your ")
     var isFoxxy = entry.indexOf(" fox say")
+    var isLoveis = entry.indexOf(" is love")
+    var timeIsIt = entry.indexOf(" time is it")
+    var isRetriveNotes = entry.indexOf("notes")
+    if (isRetriveNotes > -1) {
+      once(profile.username + ",,,,Notes", function(notes) {
+        var finalThingToSay = "Your current notes are: <br>"
+        var noteList = notes.split("0111001")
+        for (i = 0; i < noteList.length - 1; i++) {
+          var currentNote = noteList[i]
+          var numberOfNote = i + 1
+          finalThingToSay += (numberOfNote + ". " +currentNote + "<br>")
+        }
+        output.html(finalThingToSay)
+      })
+    }
+    if (timeIsIt > -1) {
+      openInNewTab("https://www.google.com/search?q=what+time+is+it&rlz=1C5CHFA_enUS707US707&oq=what+time+is+it&aqs=chrome..69i57j69i60l2j69i59.3796j0j1&sourceid=chrome&ie=UTF-8")
+    }
+    if (isLoveis > -1) {
+      output.html("baby don't hurt me")
+    }
     if (isAboutUser > -1) {
       var isUserName = entry.indexOf(" name")
       var isUserFood = entry.indexOf(" food")
