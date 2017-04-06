@@ -190,6 +190,10 @@ signInPasswordInput.keydown(function(e) {
   }
 })
 //******************************************************************************
+//***************************Sign Out*****************************************
+$("#sign-out-button").click(function() {
+  localStorage.clear()
+})
 var memory = "null"
 
 function openInNewTab(url) {
@@ -644,6 +648,10 @@ function bob(entry) {
   if (isSavage > -1) {
     output.html("Nobody is as savage as me")
     return
+  }
+  var isCool = entry.indexOf(" cool")
+  if (isCool > -1) {
+    output.html("Super Cool!")
   }
   //HOW ARE YOU RESPONSE----------------------------------------
   var isGood = entry.indexOf(" good")
