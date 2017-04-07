@@ -742,7 +742,7 @@ function bob(entry) {
       }
       if (isUserFood > -1) {
         once(profile.username + ",,,,Food", function(lfkja) {
-          output.html(lfkja + "but it's not as cool as my favorite food")
+          output.html(lfkja + " but it's not as cool as my favorite food")
         })
       }
     }
