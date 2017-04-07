@@ -697,6 +697,10 @@ function bob(entry) {
     return
   }
 }
+var unculturedswine = entry.indexOf("wbu")
+if (unculturedswine > -1) {
+  output.html("I'm swell wbu")
+}
   //Thanks ----------------------------------------------------------------
   var isThanks = entry.indexOf(" thanks")
   if (isThanks > -1) {
