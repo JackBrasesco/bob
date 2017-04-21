@@ -1,10 +1,18 @@
 //Copyright (c) 2016 Jack Brasesco All Rights Reserved.
 
-var input = $("#main-input-field");
+var inputbox = $("#main-input-field");
 var output = $("#main-output");
 var title = $("#main-title")
 var loggedIn = "false"
 var score = 0
+var sourceSong = $("#songSource");
+var currentSong = $("#currentSong")
+//////////////////THINGS TO ADD////////////////////
+///                                             ///
+///              CHANGE FUNCTION                ///
+///                  MUSIC!                     ///
+///                                             ///
+///////////////////////////////////////////////////
 
 // MINIGAMES!!!!! ------------------------------------------------------------------------------------------------------------------------
 //CLICKER \/\/\/\///\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
@@ -209,11 +217,15 @@ function awaitResponseFood() {
 function awaitResponseColor() {
   waitingForFavoriteColor = "true"
 }
+var getChanges = "false"
+if (localStorage.getItem("loggedIn") == "true") {
+  getChanges == "true"
+}
 ///START OF THE FUCTION \/\/\/\/\/\/\//\/\/\/\/\/\//\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
 function bob(entry) {
   console.log(entry)
   output.html("")
-  input.val("")
+  inputbox.val("")
   var isNegitive = entry.indexOf("not");
   if (isNegitive > -1) {
     negitvity = "true"
@@ -252,6 +264,18 @@ function bob(entry) {
 
   }
   //////////////////////////////////////////////////////////////////////////////MAINLY UTILITY STUFF////////////////////////////////////////
+  //CHANGE -------------------------------------------------------------------
+  var isChange = entry.indexOf(" change ")
+  if (isChange > -1) {
+    var thingsToChange = entry.split("change ")[1]
+    var changeThis = thingsToChange.split(" to ")[0]
+    var toThis = thingsToChange.split(" to ")[1]
+    once(profile.username + ",,,,Change", function(currentChangeList) {
+      var newChangeList = currentChangeList + ",0" + changeThis + "," + toThis
+      storeValue(profile.username + ",,,,Change", newChangeList)
+      output.html(changeThis + " will now read as this " + toThis)
+    })
+  }
   //LOOKUP -------------------------------------------------------------------
   var isResetClicker = entry.indexOf(" reset clicker ")
   if (isResetClicker > -1) {
@@ -561,6 +585,22 @@ function bob(entry) {
       openInNewTab("https://mail.google.com")
     }
   }
+  //PLAY MUSIC -----------------------------------------------------------------
+  var isPlay = entry.indexOf(" play ")
+  if (isPlay > -1) {
+    var what_to_play = entry.split(" play ")[1]
+    var audioFile = new Audio(what_to_play)
+    audioFile.play()
+    output.html("LOADING DANK MLG TUNES. . .")
+    setTimeout(function() {
+      output.html("PLAYING DANK MLG TUNES. . .")
+    },1000)
+  }
+  var isPause = entry.indexOf(" pause")
+  if (isPause  > -1) {
+    audioFile.pause()
+    output.html("Music paused")
+  }
 ////////////////////////////////////////////////////////////////////////////////MAINLY CONVERSATIONAL STUFF/////////////////////////////////
   //GREETING -------------------------------------------------------------------
   var isHi = entry.indexOf(" hi");
@@ -628,7 +668,7 @@ function bob(entry) {
   }
   var isBob = entry.indexOf(" bob")
   if (isBob > -1) {
-    output.html("That")
+    output.html("That's me")
   }
   var isLove = entry.indexOf(" love you")
   if (isLove > -1) {
@@ -697,10 +737,6 @@ function bob(entry) {
     return
   }
 }
-var unculturedswine = entry.indexOf("wbu")
-if (unculturedswine > -1) {
-  output.html("I'm swell wbu")
-}
   //Thanks ----------------------------------------------------------------
   var isThanks = entry.indexOf(" thanks")
   if (isThanks > -1) {
@@ -746,7 +782,7 @@ if (unculturedswine > -1) {
       }
       if (isUserFood > -1) {
         once(profile.username + ",,,,Food", function(lfkja) {
-          output.html(lfkja + " but it's not as cool as my favorite food")
+          output.html(lfkja + "but it's not as cool as my favorite food")
         })
       }
     }
@@ -814,10 +850,47 @@ var commands = {
 }
 annyang.addCommands(commands);
 annyang.start()
+var thing = "xDDDDDlmaololxDDDPAT"
+var fishyness = "null"
 
-input.keydown(function(e) {
+inputbox.keydown(function(e) {
   if (e.keyCode == 13) {
-    var entry = (" " + input.val())
+    if (localStorage.getItem("loggedIn") == "true")  {
+      var inputvalue = inputbox.val()
+      var detectList = []
+      once(profile.username + ",,,,Change", function(change) {
+        fishyness = "false"
+        var changeList = change.split(",")
+        for (i = 0; i < changeList.length; i++) {
+          var isThingToChange = changeList[i].indexOf(0);
+          if (isThingToChange > -1) {
+            var cleanedUpChangeList = changeList[i].replace("0","")
+            detectList.push(cleanedUpChangeList)
+            detectList.push("111011010100101010011")
+          }
+        }
+        thing = inputvalue
+        for (i = 0; i < detectList.length; i++) {
+          if (detectList[i] == "111011010100101010011") {
+
+          } else {
+          var isThereSomethingFishyGoingOn = thing.indexOf(detectList[i])
+          if (isThereSomethingFishyGoingOn > -1) {
+            fishyness = "true"
+            var thingy = new RegExp(detectList[i], "g")
+            var newthingy = thing.replace(thingy, changeList[i + 1])
+            var entry = (" " + newthingy)
+            bob(" " + entry)
+          }
+        }
+        }
+        if (fishyness == "false") {
+          bob(" " + inputvalue)
+        }
+      })
+    } else {
+    var entry = (" " + inputbox.val())
     bob(entry)
+  }
   }
 })
