@@ -5,8 +5,12 @@ var output = $("#main-output");
 var title = $("#main-title")
 var loggedIn = "false"
 var score = 0
+
+//USELESS///////////////////////////
 var sourceSong = $("#songSource");
 var currentSong = $("#currentSong")
+////////////////////////////////////
+
 //////////////////THINGS TO ADD////////////////////
 ///                                             ///
 ///              CHANGE FUNCTION                ///
@@ -283,7 +287,7 @@ function bob(entry) {
     $("#clicker").css("top",0);
   }
   var isLookup = entry.indexOf(" lookup ");
-  var isLookUp = entry.indexOf(" look up ");
+  var isLookkUp = entry.indexOf(" look up ");
   if (isLookup > -1) {
     var thing_to_lookup = entry.split(" lookup ")[1];
 
@@ -302,7 +306,7 @@ function bob(entry) {
     setTimeout(function(){openInNewTab("https://www.google.com/search?q=" + thing_to_lookup)}, 250);
     return("done!")
   }
-  if (isLookUp > -1) {
+  if (isLookkUp > -1) {
     var thing_to_lookup = entry.split(" look up ")[1];
 
     //YOUTUBE?????????????????????????? look up
@@ -472,7 +476,35 @@ function bob(entry) {
     output.html(problem_to_solve + " is equal to " + finalNumber)
     memory = (problem_to_solve + "is equal to" + finalNumber)
   }
-
+  var isMultipy = entry.indexOf("*")
+  var isAdd = entry.indexOf("+")
+  var isSubtract = entry.indexOf("-")
+  var isDivide = entry.indexOf("/")
+  if (isMultipy > -1) {
+    var numbersToMultiply = entry.split("*")
+    var answer = (parseInt(numbersToMultiply[0]) * parseInt(numbersToMultiply[1]))
+    output.html(entry + " is equal to " + answer)
+  }
+  if (isAdd > -1) {
+    var numbersToAdd = entry.split("+")
+    var answer = (parseInt(numbersToAdd[0]) + parseInt(numbersToAdd[1]))
+    output.html(entry + " is equal to " + answer)
+  }
+  if (isSubtract > -1) {
+    var numbersToSubtract = entry.split("-")
+    var answer = (parseInt(numbersToSubtract[0]) - parseInt(numbersToSubtract[1]))
+    output.html(entry + " is equal to " + answer)
+  }
+  if (isDivide > -1) {
+    var numbersToDivide = entry.split("/")
+    var answer = (parseInt(numbersToDivide[0]) + parseInt(numbersToDivide[1]))
+    output.html(entry + " is equal to " + answer)
+  }
+  //say ------------------------------------------------------------------------
+  var isSay = entry.indexOf(" say ")
+  if (isSay > -1) {
+    output.html(entry.split(" say ")[1])
+  }
   //SET ------------------------------------------------------------------------
   var isSet = entry.indexOf(" set ")
   var isAlarm = entry.indexOf(" alarm ")
@@ -646,11 +678,6 @@ function bob(entry) {
     output.html("You swallow.")
     return
   }
-  var isWhy = entry.indexOf(" why")
-  if (isWhy > -1) {
-    output.html("Because I said so.")
-    return
-  }
   var isFuck = entry.indexOf(" fuck you")
   if (isFuck > -1) {
     output.html("When and where?")
@@ -749,6 +776,38 @@ function bob(entry) {
   //WHAT ------------------------------------------------------------------
   var isWhatQuestion = entry.indexOf(" what ")
   if (isWhatQuestion > -1) {
+    var isMultipy = entry.indexOf("*")
+    var isAdd = entry.indexOf("+")
+    var isSubtract = entry.indexOf("-")
+    var isDivide = entry.indexOf("/")
+    if (isMultipy > -1) {
+      var problem = entry.split("what is ")[1]
+      var numbersToMultiply = problem.split("*")
+      var answer = (parseInt(numbersToMultiply[0]) * parseInt(numbersToMultiply[1]))
+      output.html(entry + " is equal to " + answer)
+      return
+    }
+    if (isAdd > -1) {
+      var problem = entry.split("what is ")[1]
+      var numbersToAdd = problem.split("+")
+      var answer = (parseInt(numbersToAdd[0]) + parseInt(numbersToAdd[1]))
+      output.html(entry + " is equal to " + answer)
+      return
+    }
+    if (isSubtract > -1) {
+      var problem = entry.split("what is ")[1]
+      var numbersToSubtract = problem.split("-")
+      var answer = (parseInt(numbersToSubtract[0]) - parseInt(numbersToSubtract[1]))
+      output.html(entry + " is equal to " + answer)
+      return
+    }
+    if (isDivide > -1) {
+      var problem = entry.split("what is ")[1]
+      var numbersToDivide = problem.split("/")
+      var answer = (parseInt(numbersToDivide[0]) + parseInt(numbersToDivide[1]))
+      output.html(entry + " is equal to " + answer)
+      return
+    }
     var isAboutUser = entry.indexOf(" my ")
     var isAboutBob = entry.indexOf(" your ")
     var isFoxxy = entry.indexOf(" fox say")
@@ -765,13 +824,17 @@ function bob(entry) {
           finalThingToSay += (numberOfNote + ". " +currentNote + "<br>")
         }
         output.html(finalThingToSay)
+        return
       })
     }
     if (timeIsIt > -1) {
       openInNewTab("https://www.google.com/search?q=what+time+is+it&rlz=1C5CHFA_enUS707US707&oq=what+time+is+it&aqs=chrome..69i57j69i60l2j69i59.3796j0j1&sourceid=chrome&ie=UTF-8")
+      return
     }
     if (isLoveis > -1) {
       output.html("baby don't hurt me")
+      return
+
     }
     if (isAboutUser > -1) {
       var isUserName = entry.indexOf(" name")
@@ -782,7 +845,8 @@ function bob(entry) {
       }
       if (isUserFood > -1) {
         once(profile.username + ",,,,Food", function(lfkja) {
-          output.html(lfkja + "but it's not as cool as my favorite food")
+          output.html(lfkja + " but it's not as cool as my favorite food")
+          return
         })
       }
     }
@@ -835,21 +899,68 @@ function bob(entry) {
         }
       }
     }
+    if (isWhatQuestion == 0) {
+    openInNewTab("https://www.google.com/search?q=" + entry)
+    output.html("searching . . .")
+    return
+  }
+  }
+  var isWhyQuestion = entry.indexOf(" why ")
+  if (isWhyQuestion == 0) {
+    openInNewTab("https://www.google.com/search?q=" + entry)
+    output.html("searching . . .")
+    return
+  }
+  var isWhoQuestion = entry.indexOf(" who ")
+  if (isWhoQuestion == 0) {
+    openInNewTab("https://www.google.com/search?q=" + entry)
+    output.html("searching . . .")
+    return
+  }
+  var isWhereQuestion = entry.indexOf(" where ")
+  if (isWhereQuestion == 0) {
+    openInNewTab("https://www.google.com/search?q=" + entry)
+    output.html("searching . . .")
+    return
+  }
+  var isHowQuestion = entry.indexOf(" how ")
+  if (isHowQuestion == 0) {
+    openInNewTab("https://www.google.com/search?q=" + entry)
+    output.html("searching . . .")
+    return
+  }
+  var isIsQuestion = entry.indexOf(" is ")
+  if (isIsQuestion == 0) {
+    openInNewTab("https://www.google.com/search?q=" + entry)
+    output.html("searching . . .")
+    return
+  }
+  var isWhy = entry.indexOf(" why")
+  if (isWhy > -1) {
+    output.html("Because I said so.")
+    return
   }
   if (output.html() == "") {
-    output.html("Sorry, I didn't get that . . . <br> please email jacbras@nuevaschool.org to report a problem")
+    output.html("I didn't get that. . . I'm not very smart <br> plase yell at Jack to report a problem ")
     memory = "Sorry, I didn't get that . . . <br> please email jacbras@nuevaschool.org to report a problem"
   }
 }
 
 var commands = {
   'hey bob *thing': function(thing) {
+   var isGoTo = thing.indexOf("go to ")
+   if (isGoTo > -1) {
+      var placeThatGoingTo = thing.split("go to ")[1]
+      var noSpacesInHere = placeThatGoingTo.replace(/\s+/g, '')
+   }
    var entry = (" " + thing.toLowerCase())
   bob(entry)
 }
 }
+
 annyang.addCommands(commands);
 annyang.start()
+
 var thing = "xDDDDDlmaololxDDDPAT"
 var fishyness = "null"
 
@@ -889,7 +1000,7 @@ inputbox.keydown(function(e) {
         }
       })
     } else {
-    var entry = (" " + inputbox.val())
+    var entry = (" " + inputbox.val().toLowerCase())
     bob(entry)
   }
   }
