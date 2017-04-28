@@ -13,8 +13,6 @@ var currentSong = $("#currentSong")
 
 //////////////////THINGS TO ADD////////////////////
 ///                                             ///
-///              CHANGE FUNCTION                ///
-///                  MUSIC!                     ///
 ///                                             ///
 ///////////////////////////////////////////////////
 
@@ -699,7 +697,9 @@ function bob(entry) {
   }
   var isLove = entry.indexOf(" love you")
   if (isLove > -1) {
-    output.html("I hate that I love you <br> you want her you need her <br> and I will never be her D:")
+    output.html("I hate that I want you <br> you want her you need her <br> and I will never be her D:")
+    var dankMlGBeats = new Audio("ilybae.wav");
+    dankMlGBeats.play()
     return
   }
   var isHowAreYou = entry.indexOf(" how are you")
@@ -719,6 +719,12 @@ function bob(entry) {
   var isCool = entry.indexOf(" cool")
   if (isCool > -1) {
     output.html("Super Cool!")
+  }
+  var isFriend = entry.indexOf(" friend")
+  if (isFriend > -1) {
+    output.html("You are not my friend, you are my brother, my friend.")
+    var MyFren = new Audio("myFren.wav")
+    MyFren.play()
   }
   //HOW ARE YOU RESPONSE----------------------------------------
   var isGood = entry.indexOf(" good")
@@ -833,6 +839,8 @@ function bob(entry) {
     }
     if (isLoveis > -1) {
       output.html("baby don't hurt me")
+      var sickTrack = new Audio("WhatIsLove.wav")
+      sickTrack.play()
       return
 
     }
@@ -945,6 +953,9 @@ function bob(entry) {
     memory = "Sorry, I didn't get that . . . <br> please email jacbras@nuevaschool.org to report a problem"
   }
 }
+var thing = "xDDDDDlmaololxDDDPAT"
+var fishyness = "null"
+
 
 var commands = {
   'hey bob *thing': function(thing) {
@@ -961,8 +972,6 @@ var commands = {
 annyang.addCommands(commands);
 annyang.start()
 
-var thing = "xDDDDDlmaololxDDDPAT"
-var fishyness = "null"
 
 inputbox.keydown(function(e) {
   if (e.keyCode == 13) {
