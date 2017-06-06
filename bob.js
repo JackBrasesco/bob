@@ -5,6 +5,9 @@ var output = $("#main-output");
 var title = $("#main-title")
 var loggedIn = "false"
 var score = 0
+var chat = $("#chat-box")
+var displayChat = "false"
+var chatList = []
 
 //USELESS///////////////////////////
 var sourceSong = $("#songSource");
@@ -266,6 +269,14 @@ function bob(entry) {
 
   }
   //////////////////////////////////////////////////////////////////////////////MAINLY UTILITY STUFF////////////////////////////////////////
+  //CHAT----------------------------------------------------------------------
+  var isOpen = entry.indexOf(" open chat")
+  if (isOpen > -1) {
+    chat.css("display", "inline-block");
+    displayChat = "true"
+    inputbox.css("left", "230px")
+    inputbox.attr("placeholder", "Type to chat. . . ")
+  }
   //CHANGE -------------------------------------------------------------------
   var isChange = entry.indexOf(" change ")
   if (isChange > -1) {
@@ -948,9 +959,13 @@ function bob(entry) {
     output.html("Because I said so.")
     return
   }
-  if (output.html() == "") {
-    output.html("I didn't get that. . . I'm not very smart <br> plase yell at Jack to report a problem ")
-    memory = "Sorry, I didn't get that . . . <br> please email jacbras@nuevaschool.org to report a problem"
+  if (displayChat == "false") {
+    if (output.html() == "") {
+      output.html("I didn't get that. . . I'm not very smart <br> please yell at Jack to report a problem ")
+      memory = "Sorry, I didn't get that . . . <br> please email jacbras@nuevaschool.org to report a problem"
+    }
+  } else {
+    output.html("")
   }
 }
 var thing = "xDDDDDlmaololxDDDPAT"
@@ -975,6 +990,12 @@ annyang.start()
 
 inputbox.keydown(function(e) {
   if (e.keyCode == 13) {
+    if (displayChat == "true") {
+      var message = (inputbox.val()).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      var user = (profile.username).replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      addListItem("chat", user + ",,,." + message)
+      inputbox.val("")
+    } else {
     if (localStorage.getItem("loggedIn") == "true")  {
       var inputvalue = inputbox.val()
       var detectList = []
@@ -1013,4 +1034,14 @@ inputbox.keydown(function(e) {
     bob(entry)
   }
   }
+}
+})
+
+onNewListItem("chat", function(r) {
+  var messageUser = r.split(",,,.")[0]
+  var messageMessage = r.split(",,,.")[1]
+  var message = messageUser.replace(/</g, "&lt;").replace(/>/g, "&gt;").bold() + ": " + messageMessage.replace(/</g, "&lt;").replace(/>/g, "&gt;")
+  chatList.push(message)
+  var limit = chatList.slice(chatList.length - 9, chatList.length)
+  chat.html(limit.join("<br>"))
 })
