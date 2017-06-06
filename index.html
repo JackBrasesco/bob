@@ -9,6 +9,9 @@
     <title> Bot Bob </title>
   </head>
   <body>
+    <audio id="currentSong">
+      <source id="songSource" src="pokemon.mp3" type="audio/mpeg" />
+    </audio>
     <canvas id="snake-canvas"></canvas>
     <h1 id="main-title"> FUN WITH BOT BOB 3.0 </h1>
     <div id="clicker"></div>
@@ -16,25 +19,30 @@
       <div class="row">
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
-          <img id="bob-main-img" src="https://thumbs.dreamstime.com/x/old-man-celebrating-laptop-16618166.jpg" />
+          <img id="bob-main-img" src="file:///Users/jacbras/Documents/src/web/proj_bob3/bob.jpg" />
         </div>
         <div class="col-lg-4"></div>
       </div>
       <div class="row">
         <div class="col-lg-1"></div>
         <div class="col-lg-10" id="main-text-field">
-          <div id="main-output"></div>
+          <div id="chat-box">
+            <div id="exit-chat-button"></div>
+          </div>
+          <div id="main-output">
+          </div>
           <input type="text" id="main-input-field" placeholder="    Ask me anything . . ." />
         </div>
         <div class="col-lg-1"></div>
       </div>
       <div class="row">
         <div class="col-10-lg" id="button-holder">
-          <a id="help-button" class="btn btm-btn" href="help.html"> Help </a>
-          <a  id="sign-in-button" class="btn btm-btn" href="sign.html"> Sign In </a>
+          <a id="help-button" class="btn btm-btn" href="file:///Users/jacbras/Documents/src/web/proj_bob3/help.html"> Help </a>
+          <a  id="sign-in-button" class="btn btm-btn" href="file:///Users/jacbras/Documents/src/web/proj_bob3/sign.html"> Sign In </a>
         </div>
     </div>
-    <script src="bob.js"></script>
     <script src="firebase-config.js"></script>
+    <script src="bob.js"></script>
   </body>
 </html>
+
