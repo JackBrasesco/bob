@@ -8,6 +8,7 @@ var score = 0
 var chat = $("#chat-box")
 var displayChat = "false"
 var chatList = []
+var dmButton = $("#dm-button")
 
 //USELESS///////////////////////////
 var sourceSong = $("#songSource");
@@ -19,6 +20,9 @@ var currentSong = $("#currentSong")
 ///                                             ///
 ///////////////////////////////////////////////////
 
+dmButton.click(function() {
+  output.html("hi")
+})
 // MINIGAMES!!!!! ------------------------------------------------------------------------------------------------------------------------
 //CLICKER \/\/\/\///\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 $("#clicker").click(function() {
@@ -131,6 +135,7 @@ function signup(inputedUsername, inputedPassword1, inputedPassword2) {
         var firstBalue = currentUsernames + "," + finalUsername
         storeValue("Usernames", firstBalue);
       })
+      storeValue(finalUsername + ",,,,Change", "0ayyylmaolol,hi")
       storeValue(finalUsername, finalPassword);
     }
   })
@@ -269,6 +274,49 @@ function bob(entry) {
 
   }
   //////////////////////////////////////////////////////////////////////////////MAINLY UTILITY STUFF////////////////////////////////////////
+  //DMs ----------------------------------------------------------------------
+  var isStart = entry.indexOf(" start dm with ")
+  if (isStart > -1) {
+    var who_to_dm = entry.split("with ")[1];
+    var isUserReal = "false"
+    once("Usernames", function(e) {
+      for (i = 0; i < e.split(",").length; i++) {
+        var currentUserToCheck = e.split(",")[i]
+        if (who_to_dm == currentUserToCheck) {
+          console.log("hi")
+          isUserReal = "true"
+        }
+      }
+    })
+    setTimeout(function() {
+      if (isUserReal == "true") {
+        console.log("hi")
+        once("DMs", function(lol) {
+          var newDm = who_to_dm + "..." + profile.username
+          for (i = 0; i < lol.split(",").length; i++) {
+            var currentConvo = lol.split(",")[i]
+            console.log(currentConvo)
+            if (newDm == currentConvo) {
+              console.log("YOU ALREADY HAVE ONE")
+              output.html("You already have a conversation with this person. Say open DM with " + who_to_dm + " to open the conversation")
+              return "lmao"
+            } else {
+              once("DMs", function(oldDMs) {
+                setTimeout(function() {
+                var valueToStore = (oldDMs + "," + who_to_dm + "..." + profile.username)
+                storeValue("DMs", valueToStore)
+                output.html("conversation created! Say open DM with " + who_to_dm + " to open the conversation")
+              },500)
+              })
+            }
+          }
+        })
+
+      } else {
+        output.html("This user does not exist. . .")
+      }
+    },400)
+    }
   //CHAT----------------------------------------------------------------------
   var isOpen = entry.indexOf(" open chat")
   if (isOpen > -1) {
