@@ -620,11 +620,11 @@ function bob(entry) {
       return
     }
     if (place_to_go == "schedule") {
-      openInNewTab("https://docs.google.com/spreadsheets/d/1rJ2Sfd-YpnScN5gZpPP8pYMbVXe-3h1PX2kFb8R7CUg/htmlview?sle=true")
+      openInNewTab("https://docs.google.com/spreadsheets/d/1x_TrA0pXxfy17RbSAbw-myCG8bj41esXwRkxIH6vvHA/edit#gid=12876729")
       return
     }
     if (place_to_go == "the schedule") {
-      openInNewTab("https://docs.google.com/spreadsheets/d/1rJ2Sfd-YpnScN5gZpPP8pYMbVXe-3h1PX2kFb8R7CUg/htmlview?sle=true")
+      openInNewTab("https://docs.google.com/spreadsheets/d/1x_TrA0pXxfy17RbSAbw-myCG8bj41esXwRkxIH6vvHA/edit#gid=12876729")
       return
     }
     if (place_to_go == "canvas") {
