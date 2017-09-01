@@ -10,10 +10,27 @@ var displayChat = "false"
 var chatList = []
 var dmButton = $("#dm-button")
 
-//USELESS///////////////////////////
+var hue = jsHue();
+var bridge = hue.bridge('10.0.0.3');
+var user = bridge.user("SLNNqvOYSKUZLfDIMpmI9oz0ZAD2R7n0UAyZ1Lhi")
+
+var light1 = {
+  "on": false,
+}
+var light2 = {
+  "on": false,
+}
+var light3 = {
+  "on": false,
+}
+
+
+
+
+//USELESS BUT STILL HERE FOR NO REASON///////////////////////////
 var sourceSong = $("#songSource");
 var currentSong = $("#currentSong")
-////////////////////////////////////
+////////////////////////////////////////////////////////////////
 
 //////////////////THINGS TO ADD////////////////////
 ///                                             ///
@@ -231,7 +248,7 @@ var getChanges = "false"
 if (localStorage.getItem("loggedIn") == "true") {
   getChanges == "true"
 }
-///START OF THE FUCTION \/\/\/\/\/\/\//\/\/\/\/\/\//\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\
+///START OF THE FUCTION \/\/\/\/\/\/\//\/\/\/\/\/\//\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 function bob(entry) {
   console.log(entry)
   output.html("")
@@ -317,6 +334,287 @@ function bob(entry) {
       }
     },400)
     }
+  //LIGHTS--------------------------------------------------------------------
+  function light1Change(command) {
+    user.setLightState(1, command).then(data => {
+      console.log("lights have been changed");
+  });
+}
+function light2Change(command) {
+  user.setLightState(2, command).then(data => {
+    console.log("lights have been changed");
+});
+}
+function light3Change(command) {
+  user.setLightState(3, command).then(data => {
+    console.log("lights have been changed");
+});
+}
+  function lightsChange(e) {
+    user.setLightState(3, e).then(data => {
+      console.log("lights have been changed");
+  });
+    user.setLightState(2, e).then(data => {
+      console.log("lights have been changed");
+  });
+    user.setLightState(1, e).then(data => {
+      console.log("lights have been changed");
+  });
+  }
+
+  var isLights = entry.indexOf(" lights")
+  if (isLights > -1) {
+    var commands = {
+      "on": { on: true },
+      "off": { on: false },
+      "colorRed": { hue: 65280},
+      "colorBlue": { hue: 46920},
+      "colorYellow": { hue: 12750},
+      "colorGreen": { hue: 25500},
+      "colorPink": { hue: 56100},
+      "loop": { effect: 'colorloop'},
+      "static": { effect: 'none'}
+    }
+    var isLightsOn =     entry.indexOf(" on")
+    var isLightsOff =    entry.indexOf(" off")
+    var isLightsLoop =   entry.indexOf(" loop")
+    var isLightsRed =    entry.indexOf(" red")
+    var isLightsBlue =   entry.indexOf(" blue")
+    var isLightsYellow = entry.indexOf(" yellow")
+    var isLightsGreen =  entry.indexOf(" green")
+    var isLightsPink =   entry.indexOf(" pink")
+    var isLightsStatic = entry.indexOf(" static")
+    if (isLightsOn > -1) {
+      lightsChange(commands.on)
+    }
+    if (isLightsOff > -1) {
+      lightsChange(commands.off)
+    }
+    if (isLightsRed > -1) {
+      lightsChange(commands.colorRed)
+    }
+    if (isLightsBlue > -1) {
+      lightsChange(commands.colorBlue)
+    }
+    if (isLightsYellow > -1) {
+      lightsChange(commands.colorYellow)
+    }
+    if (isLightsGreen > -1) {
+      lightsChange(commands.colorGreen)
+    }
+    if (isLightsPink > -1) {
+      lightsChange(commands.colorPink)
+    }
+    if (isLightsLoop > -1) {
+      lightsChange(commands.loop)
+    }
+    if (isLightsOn > -1) {
+      lightsChange(commands.static)
+    }
+  }
+  var isLight = entry.indexOf(" light")
+  if (isLight > -1) {
+    var commands = {
+      "on": { on: true },
+      "off": { on: false },
+      "colorRed": { hue: 65280},
+      "colorBlue": { hue: 46920},
+      "colorYellow": { hue: 12750},
+      "colorGreen": { hue: 25500},
+      "colorPink": { hue: 56100},
+      "loop": { effect: 'colorloop'},
+      "static": { effect: 'none'}
+    }
+    var isLight1 = entry.indexOf(" 1");
+    var isLight2 = entry.indexOf(" 2");
+    var isLight3 = entry.indexOf(" 3");
+    var isLightMain = entry.indexOf(" main ")
+    if (isLight1 > -1) {
+      var isLightsOn =     entry.indexOf(" on")
+      var isLightsOff =    entry.indexOf(" off")
+      var isLightsLoop =   entry.indexOf(" loop")
+      var isLightsRed =    entry.indexOf(" red")
+      var isLightsBlue =   entry.indexOf(" blue")
+      var isLightsYellow = entry.indexOf(" yellow")
+      var isLightsGreen =  entry.indexOf(" green")
+      var isLightsPink =   entry.indexOf(" pink")
+      var isLightsStatic = entry.indexOf(" static")
+      if (isLightsOn > -1) {
+        light1Change(commands.on)
+      }
+      if (isLightsOff > -1) {
+        light1Change(commands.off)
+      }
+      if (isLightsRed > -1) {
+        light1Change(commands.colorRed)
+      }
+      if (isLightsBlue > -1) {
+        light1Change(commands.colorBlue)
+      }
+      if (isLightsYellow > -1) {
+        light1Change(commands.colorYellow)
+      }
+      if (isLightsGreen > -1) {
+        light1Change(commands.colorGreen)
+      }
+      if (isLightsPink > -1) {
+        light1Change(commands.colorPink)
+      }
+      if (isLightsLoop > -1) {
+        light1Change(commands.loop)
+      }
+      if (isLightsOn > -1) {
+        light1Change(commands.static)
+      }
+    }
+    if (isLight2 > -1) {
+      var commands = {
+        "on": { on: true },
+        "off": { on: false },
+        "colorRed": { hue: 65280},
+        "colorBlue": { hue: 46920},
+        "colorYellow": { hue: 12750},
+        "colorGreen": { hue: 25500},
+        "colorPink": { hue: 56100},
+        "loop": { effect: 'colorloop'},
+        "static": { effect: 'none'}
+      }
+      var isLightsOn =     entry.indexOf(" on")
+      var isLightsOff =    entry.indexOf(" off")
+      var isLightsLoop =   entry.indexOf(" loop")
+      var isLightsRed =    entry.indexOf(" red")
+      var isLightsBlue =   entry.indexOf(" blue")
+      var isLightsYellow = entry.indexOf(" yellow")
+      var isLightsGreen =  entry.indexOf(" green")
+      var isLightsPink =   entry.indexOf(" pink")
+      var isLightsStatic = entry.indexOf(" static")
+      if (isLightsOn > -1) {
+        light2Change(commands.on)
+      }
+      if (isLightsOff > -1) {
+        light2Change(commands.off)
+      }
+      if (isLightsRed > -1) {
+        light2Change(commands.colorRed)
+      }
+      if (isLightsBlue > -1) {
+        light2Change(commands.colorBlue)
+      }
+      if (isLightsYellow > -1) {
+        light2Change(commands.colorYellow)
+      }
+      if (isLightsGreen > -1) {
+        light2Change(commands.colorGreen)
+      }
+      if (isLightsPink > -1) {
+        light2Change(commands.colorPink)
+      }
+      if (isLightsLoop > -1) {
+        light2Change(commands.loop)
+      }
+      if (isLightsOn > -1) {
+        light2Change(commands.static)
+      }
+    }
+    if (isLight3 > -1) {
+      var commands = {
+        "on": { on: true },
+        "off": { on: false },
+        "colorRed": { hue: 65280},
+        "colorBlue": { hue: 46920},
+        "colorYellow": { hue: 12750},
+        "colorGreen": { hue: 25500},
+        "colorPink": { hue: 56100},
+        "loop": { effect: 'colorloop'},
+        "static": { effect: 'none'}
+      }
+      var isLightsOn =     entry.indexOf(" on")
+      var isLightsOff =    entry.indexOf(" off")
+      var isLightsLoop =   entry.indexOf(" loop")
+      var isLightsRed =    entry.indexOf(" red")
+      var isLightsBlue =   entry.indexOf(" blue")
+      var isLightsYellow = entry.indexOf(" yellow")
+      var isLightsGreen =  entry.indexOf(" green")
+      var isLightsPink =   entry.indexOf(" pink")
+      var isLightsStatic = entry.indexOf(" static")
+      if (isLightsOn > -1) {
+        light3Change(commands.on)
+      }
+      if (isLightsOff > -1) {
+        light3Change(commands.off)
+      }
+      if (isLightsRed > -1) {
+        light3Change(commands.colorRed)
+      }
+      if (isLightsBlue > -1) {
+        light3Change(commands.colorBlue)
+      }
+      if (isLightsYellow > -1) {
+        light3Change(commands.colorYellow)
+      }
+      if (isLightsGreen > -1) {
+        light3Change(commands.colorGreen)
+      }
+      if (isLightsPink > -1) {
+        light3Change(commands.colorPink)
+      }
+      if (isLightsLoop > -1) {
+        light3Change(commands.loop)
+      }
+      if (isLightsOn > -1) {
+        light3Change(commands.static)
+      }
+    }
+    if (isLightMain > -1) {
+      var commands = {
+        "on": { on: true },
+        "off": { on: false },
+        "colorRed": { hue: 65280},
+        "colorBlue": { hue: 46920},
+        "colorYellow": { hue: 12750},
+        "colorGreen": { hue: 25500},
+        "colorPink": { hue: 56100},
+        "loop": { effect: 'colorloop'},
+        "static": { effect: 'none'}
+      }
+      var isLightsOn =     entry.indexOf(" on")
+      var isLightsOff =    entry.indexOf(" off")
+      var isLightsLoop =   entry.indexOf(" loop")
+      var isLightsRed =    entry.indexOf(" red")
+      var isLightsBlue =   entry.indexOf(" blue")
+      var isLightsYellow = entry.indexOf(" yellow")
+      var isLightsGreen =  entry.indexOf(" green")
+      var isLightsPink =   entry.indexOf(" pink")
+      var isLightsStatic = entry.indexOf(" static")
+      if (isLightsOn > -1) {
+        light3Change(commands.on)
+      }
+      if (isLightsOff > -1) {
+        light3Change(commands.off)
+      }
+      if (isLightsRed > -1) {
+        light3Change(commands.colorRed)
+      }
+      if (isLightsBlue > -1) {
+        light3Change(commands.colorBlue)
+      }
+      if (isLightsYellow > -1) {
+        light3Change(commands.colorYellow)
+      }
+      if (isLightsGreen > -1) {
+        light3Change(commands.colorGreen)
+      }
+      if (isLightsPink > -1) {
+        light3Change(commands.colorPink)
+      }
+      if (isLightsLoop > -1) {
+        light3Change(commands.loop)
+      }
+      if (isLightsOn > -1) {
+        light3Change(commands.static)
+      }
+    }
+  }
   //CHAT----------------------------------------------------------------------
   var isOpen = entry.indexOf(" open chat")
   if (isOpen > -1) {
