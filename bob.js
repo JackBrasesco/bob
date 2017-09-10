@@ -1318,7 +1318,7 @@ var thing = "xDDDDDlmaololxDDDPAT"
 var fishyness = "null"
 
 
-var commands = {
+var commands2 = {
   'hey bob *thing': function(thing) {
    var isGoTo = thing.indexOf("go to ")
    if (isGoTo > -1) {
@@ -1330,7 +1330,7 @@ var commands = {
 }
 }
 
-annyang.addCommands(commands);
+annyang.addCommands(commands2);
 annyang.start()
 
 
