@@ -1391,3 +1391,4 @@ onNewListItem("chat", function(r) {
   var limit = chatList.slice(chatList.length - 9, chatList.length)
   chat.html(limit.join("<br>"))
 })
+
