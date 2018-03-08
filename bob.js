@@ -993,10 +993,12 @@ function light3Change(command) {
   var isSiri = entry.indexOf(" siri");
   if (isSiri > -1) {
     output.html("Siri is a useless piece of trash, not nearly as good as me")
+    return
   }
   var isAlexa= entry.indexOf(" alexa");
   if (isAlexa > -1) {
      output.html("Alexa and I have a very personal relationship ;) <br> don't tell bobette")
+    return
   }
   var isHi = entry.indexOf(" hi");
   var isHello = entry.indexOf(" hello");
