@@ -9,6 +9,7 @@ var chat = $("#chat-box")
 var displayChat = "false"
 var chatList = []
 var dmButton = $("#dm-button")
+var clicker = $("#clicker")
 
 var hue = jsHue();
 var bridge = hue.bridge('10.0.0.3');
@@ -32,25 +33,18 @@ var sourceSong = $("#songSource");
 var currentSong = $("#currentSong")
 ////////////////////////////////////////////////////////////////
 
-//////////////////THINGS TO ADD////////////////////
-///                                             ///
-///                                             ///
-///////////////////////////////////////////////////
-
 dmButton.click(function() {
   output.html("hi")
 })
 // MINIGAMES!!!!! ------------------------------------------------------------------------------------------------------------------------
 //CLICKER \/\/\/\///\\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
-$("#clicker").click(function() {
+clicker.click(function() {
   score = score + 1
   title.html(score)
   var randomLeft = Math.floor(Math.random() * 1438)
-  console.log(randomLeft)
-  $("#clicker").css("left",randomLeft)
+  clicker.css("left",randomLeft)
   var randomRight = Math.floor(Math.random() * 850)
-  console.log(randomRight)
-  $("#clicker").css("top",randomRight)
+  clicker.css("top",randomRight)
   if (score == 1) {
     output.html("I bet you'll never beat my highscore of . . .")
     var bobshighscore = "1"
@@ -83,9 +77,9 @@ $("#clicker").click(function() {
         score = score + 1
         title.html(score)
         var randomLeft = Math.floor(Math.random() * 1438)
-        $("#clicker").css("left",randomLeft)
+      clicker.css("left",randomLeft)
         var randomRight = Math.floor(Math.random() * 850)
-        $("#clicker").css("top",randomRight)
+        clicker.css("top",randomRight)
     }, 100)
       if (score == 100) {
         output.html("HAHAHAH... I'M TOO GOOD")
@@ -251,6 +245,7 @@ if (localStorage.getItem("loggedIn") == "true") {
 ///START OF THE FUCTION \/\/\/\/\/\/\//\/\/\/\/\/\//\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
 function bob(entry) {
   console.log(entry)
+  clicker.css("background-color","red")
   output.html("")
   inputbox.val("")
   var isNegitive = entry.indexOf("not");
@@ -274,6 +269,8 @@ function bob(entry) {
     storeValue((profile.username) + ",,,,Food", favoriteFood)
     waitingForFavoriteFood = "false"
     output.html("yum")
+    var bobTalks = new Audio("Audio/yum.mp3")
+    bobTalks.play()
   }
 
   if (waitingForFavoriteColor == "true") {
@@ -638,8 +635,8 @@ function light3Change(command) {
   //LOOKUP -------------------------------------------------------------------
   var isResetClicker = entry.indexOf(" reset clicker ")
   if (isResetClicker > -1) {
-    $("#clicker").css("left",0);
-    $("#clicker").css("top",0);
+    clicker.css("left",0);
+    clicker.css("top",0);
   }
   var isLookup = entry.indexOf(" lookup ");
   var isLookkUp = entry.indexOf(" look up ");
@@ -657,6 +654,8 @@ function light3Change(command) {
     //GOOGLE??????????????????????????? lookup
 
     output.html("let me look that up. . .")
+    var bobTalks = new Audio("Audio/LetMeLookThatUp.mp3")
+    bobTalks.play()
     memory = "let me look that up. . ."
     setTimeout(function(){openInNewTab("https://www.google.com/search?q=" + thing_to_lookup)}, 250);
     return("done!")
@@ -674,6 +673,8 @@ function light3Change(command) {
     }
     //GOOGLE??????????????????????????? look up
     output.html("let me look that up. . .")
+    var bobTalks = new Audio("Audio/LetMeLookThatUp.mp3")
+    bobTalks.play()
     memory = "let me look that up. . ."
     setTimeout(function(){openInNewTab("https://www.google.com/search?q=" + thing_to_lookup)}, 250);
   }
@@ -681,7 +682,10 @@ function light3Change(command) {
   var isTranslate = entry.indexOf(" translate ")
   if (isTranslate > -1) {
     var thing_to_translate = entry.split("translate ")[1]
+    var bobTalks = new Audio("Audio/Translate.mp3")
+    bobTalks.play()
     openInNewTab("http://www.spanishdict.com/translate/" + thing_to_translate)
+    output.html("translating...")
   }
   //SEARCH ---------------------------------------------------------------------
   var isSearch = entry.indexOf(" search ")
@@ -693,6 +697,8 @@ function light3Change(command) {
       var thing_to_search = thing_to_search.split("for ")[1];
     }
     if (isOnYoutube > -1) {
+      var bobTalks = new Audio("Audio/LookupYoutube.mp3")
+      bobTalks.play()
       openInNewTab("https://www.youtube.com/results?search_query=" + thing_to_search);
       return "done!"
     }
@@ -711,6 +717,8 @@ function light3Change(command) {
     return
   } else {
     output.html("you must be logged in to store notes. . .")
+    var bobTalks = new Audio("Audio/YouMustBeLoggedInToStoreNotes.mp3")
+    bobTalks.play()
     return
   }
   }
@@ -769,6 +777,8 @@ function light3Change(command) {
     var secondNumbertoSubtract = parseInt(problem_to_solve.split("-")[1]);
     var finalNumber = (firstNumbertoSubtract-secondNumbertoSubtract);
     output.html(problem_to_solve + " is equal to " + finalNumber)
+    var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+    bobTalks.play()
     memory = (problem_to_solve + "is equal to" + finalNumber)
   }
   if (isMultiply > -1) {
@@ -787,6 +797,8 @@ function light3Change(command) {
       var secondNumbertoX = parseInt(problem_to_solve.split("x")[1]);
       var finalNumber = (firstNumbertoX*secondNumbertoX);
       output.html(problem_to_solve + " is equal to " + finalNumber)
+      var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+      bobTalks.play()
       memory = (problem_to_solve + "is equal to" + finalNumber)
     }
     if (isthereamultipysign > -1) {
@@ -794,6 +806,8 @@ function light3Change(command) {
     var secondNumbertoMultiply = parseInt(problem_to_solve.split("*")[1]);
     var finalNumber = (firstNumbertoMultiply*secondNumbertoMultiply);
     output.html(problem_to_solve + " is equal to " + finalNumber)
+    var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+    bobTalks.play()
     memory = (problem_to_solve + "is equal to" + finalNumber)
   }
   }
@@ -809,6 +823,8 @@ function light3Change(command) {
     var secondNumbertoAdd = parseInt(problem_to_solve.split("+")[1]);
     var finalNumber = (firstNumbertoAdd+secondNumbertoAdd);
     output.html(problem_to_solve + " is equal to " + finalNumber)
+    var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+    bobTalks.play()
     memory = (problem_to_solve + "is equal to" + finalNumber)
   }
   if (isDivide > -1) {
@@ -829,6 +845,8 @@ function light3Change(command) {
     var secondNumbertoDivide = parseInt(problem_to_solve.split("/")[1]);
     var finalNumber = (firstNumbertoDivide/secondNumbertoDivide);
     output.html(problem_to_solve + " is equal to " + finalNumber)
+    var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+    bobTalks.play()
     memory = (problem_to_solve + "is equal to" + finalNumber)
   }
   var isMultipy = entry.indexOf("*")
@@ -839,21 +857,29 @@ function light3Change(command) {
     var numbersToMultiply = entry.split("*")
     var answer = (parseInt(numbersToMultiply[0]) * parseInt(numbersToMultiply[1]))
     output.html(entry + " is equal to " + answer)
+    var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+    bobTalks.play()
   }
   if (isAdd > -1) {
     var numbersToAdd = entry.split("+")
     var answer = (parseInt(numbersToAdd[0]) + parseInt(numbersToAdd[1]))
     output.html(entry + " is equal to " + answer)
+    var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+    bobTalks.play()
   }
   if (isSubtract > -1) {
     var numbersToSubtract = entry.split("-")
     var answer = (parseInt(numbersToSubtract[0]) - parseInt(numbersToSubtract[1]))
     output.html(entry + " is equal to " + answer)
+    var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+    bobTalks.play()
   }
   if (isDivide > -1) {
     var numbersToDivide = entry.split("/")
     var answer = (parseInt(numbersToDivide[0]) + parseInt(numbersToDivide[1]))
     output.html(entry + " is equal to " + answer)
+    var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+    bobTalks.play()
   }
   //say ------------------------------------------------------------------------
   var isSay = entry.indexOf(" say ")
@@ -895,6 +921,8 @@ function light3Change(command) {
     if (ismathroot > -1) {
       var thing_to_root = what_to_find.split("of ")[1]
       output.html("The square root of " + thing_to_root + " is " + (Math.sqrt(thing_to_root)))
+      var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+      bobTalks.play()
       memory = "The square root of " + thing_to_root + " is " + (Math.sqrt(thing_to_root))
       return "rooooooted!"
     }
@@ -910,6 +938,8 @@ function light3Change(command) {
   if (isGoTo > -1) {
     var place_to_go = entry.split("go to ")[1]
     if (place_to_go == "youtube") {
+      var bobTalks = new Audio("Audio/GoingToYoutube.mp3")
+      bobTalks.play()
       openInNewTab("https://www.youtube.com/")
       return "lmao goteeem"
     }
@@ -918,14 +948,21 @@ function light3Change(command) {
       return
     }
     if (place_to_go == "schedule") {
+      var bobTalks = new Audio("Audio/GoingToSchedule.mp3")
+      bobTalks.play()
       openInNewTab("https://docs.google.com/spreadsheets/d/1x_TrA0pXxfy17RbSAbw-myCG8bj41esXwRkxIH6vvHA/edit#gid=12876729")
+
       return
     }
     if (place_to_go == "the schedule") {
+      var bobTalks = new Audio("Audio/GoingToSchedule.mp3")
+      bobTalks.play()
       openInNewTab("https://docs.google.com/spreadsheets/d/1x_TrA0pXxfy17RbSAbw-myCG8bj41esXwRkxIH6vvHA/edit#gid=12876729")
       return
     }
     if (place_to_go == "canvas") {
+      var bobTalks = new Audio("Audio/GoingToCanvas.mp3")
+      bobTalks.play()
       openInNewTab("https://nuevaschool.instructure.com/calendar")
       return "cool stuff"
     }
@@ -940,10 +977,14 @@ function light3Change(command) {
       openInNewTab("https://nuevaschool.instructure.com/courses/890")
     }
     if (place_to_go == "drive") {
+      var bobTalks = new Audio("Audio/GoingToDrive.mp3")
+      bobTalks.play()
       openInNewTab("https://drive.google.com/")
       return "josh is lame"
     }
     else {
+      var bobTalks = new Audio("Audio/GoingWebsite.mp3")
+      bobTalks.play()
       openInNewTab("https://" + place_to_go)
       return "ay lmao"
     }
@@ -951,11 +992,15 @@ function light3Change(command) {
   //DEFINE ---------------------------------------------------------------------
   var isDefine = entry.indexOf(" define ")
   if (isDefine > -1) {
+    var bobTalks = new Audio("Audio/FindDefinition.mp3")
+    bobTalks.play()
     openInNewTab("https://www.google.com/search?q=" + entry)
     return "lmao"
   }
   var isSynonym = entry.indexOf(" synonym ")
   if (isSynonym > -1) {
+    var bobTalks = new Audio("Audio/FindSynonym.mp3")
+    bobTalks.play()
     openInNewTab("https://www.google.com/search?q=" + entry)
     return "gang gang"
   }
@@ -964,11 +1009,15 @@ function light3Change(command) {
   if (isCheck > -1) {
     var isMyemail = entry.indexOf(" my email")
     if (isMyemail > -1) {
+      var bobTalks = new Audio("Audio/CheckEmail.mp3")
+      bobTalks.play()
       openInNewTab("https://mail.google.com");
       return "done!"
     }
     var isEmail = entry.indexOf(" email")
     if (isEmail > -1) {
+      var bobTalks = new Audio("Audio/CheckEmail.mp3")
+      bobTalks.play()
       openInNewTab("https://mail.google.com")
     }
   }
@@ -976,8 +1025,10 @@ function light3Change(command) {
   var isPlay = entry.indexOf(" play ")
   if (isPlay > -1) {
     var what_to_play = entry.split(" play ")[1]
-    var audioFile = new Audio(what_to_play)
+    var audioFile = new Audio("Audio/" + what_to_play + ".mp3")
     audioFile.play()
+    var bobTalks = new Audio("Audio/LoadingDankMLGTunes.mp3")
+    bobTalks.play()
     output.html("LOADING DANK MLG TUNES. . .")
     setTimeout(function() {
       output.html("PLAYING DANK MLG TUNES. . .")
@@ -990,16 +1041,6 @@ function light3Change(command) {
   }
 ////////////////////////////////////////////////////////////////////////////////MAINLY CONVERSATIONAL STUFF/////////////////////////////////
   //GREETING -------------------------------------------------------------------
-  var isSiri = entry.indexOf(" siri");
-  if (isSiri > -1) {
-    output.html("Siri is a useless piece of trash, not nearly as good as me")
-    return
-  }
-  var isAlexa= entry.indexOf(" alexa");
-  if (isAlexa > -1) {
-     output.html("Alexa and I have a very personal relationship ;) <br> don't tell bobette")
-    return
-  }
   var isHi = entry.indexOf(" hi");
   var isHello = entry.indexOf(" hello");
   var isHey = entry.indexOf(" hey");
@@ -1007,32 +1048,48 @@ function light3Change(command) {
   var iswhatsupgrammar = entry.indexOf(" what's up");
   var greetingresponse = ["Hey there!","Howdy!","Hi, how are you?","salutations earthling."]
   var randomNumber3 = Math.floor(Math.random() * 4)
+  var greetingresponeVoice = ["HeyThere.mp3","Howdy.mp3","HiHowAreYou.mp3","SalutationsEarthling.mp3"]
   if (isHi > -1) {
     var response_greeting = greetingresponse[randomNumber3]
+    var response_voice = greetingresponeVoice[randomNumber3]
+    var bobTalks = new Audio("Audio/" + response_voice)
+    bobTalks.play()
     output.html(response_greeting)
     memory = response_greeting
     return
   }
   if (isHello > -1) {
     var response_greeting = greetingresponse[randomNumber3]
+    var response_voice = greetingresponeVoice[randomNumber3]
+    var bobTalks = new Audio("Audio/" + response_voice)
+    bobTalks.play()
     output.html(response_greeting)
     memory = response_greeting
     return
   }
   if (isHey > -1) {
     var response_greeting = greetingresponse[randomNumber3]
+    var response_voice = greetingresponeVoice[randomNumber3]
+    var bobTalks = new Audio("Audio/" + response_voice)
+    bobTalks.play()
     output.html(response_greeting)
     memory = response_greeting
     return
   }
   if (iswhatsup > -1) {
     var response_greeting = greetingresponse[randomNumber3]
+    var response_voice = greetingresponeVoice[randomNumber3]
+    var bobTalks = new Audio("Audio/" + response_voice)
+    bobTalks.play()
     output.html(response_greeting)
     memory = response_greeting
     return
   }
   if (iswhatsupgrammar > -1) {
     var response_greeting = greetingresponse[randomNumber3]
+    var response_voice = greetingresponeVoice[randomNumber3]
+    var bobTalks = new Audio("Audio/" + response_voice)
+    bobTalks.play()
     output.html(response_greeting)
     memory = response_greeting
     return
@@ -1041,31 +1098,41 @@ function light3Change(command) {
   var isSuck = entry.indexOf(" you suck")
   if (isSuck > -1) {
     output.html("You swallow.")
+    var bobTalks = new Audio("Audio/YouSwallow.mp3")
+    bobTalks.play()
     return
   }
   var isFuck = entry.indexOf(" fuck you")
   if (isFuck > -1) {
+    var bobTalks = new Audio("Audio/WhenAndWhere.mp3")
+    bobTalks.play()
     output.html("When and where?")
     return
   }
   var isHateBob = entry.indexOf(" hate you")
   if (isHateBob > -1) {
+    var bobTalks = new Audio("Audio/ThenIGuessTheFeelingIsMutual.mp3")
+    bobTalks.play()
     output.html("Then I guess the feeling is mutual.")
     return
   }
   var isHate = entry.indexOf(" hate")
   if (isHate > -1) {
+    var bobTalks = new Audio("Audio/HateIsAStrongWord.mp3")
+    bobTalks.play()
     output.html("Hate is a strong word.")
     return
   }
   var isBob = entry.indexOf(" bob")
   if (isBob > -1) {
+    var bobTalks = new Audio("Audio/ThatsMe.mp3")
+    bobTalks.play()
     output.html("That's me")
   }
   var isLove = entry.indexOf(" love you")
   if (isLove > -1) {
     output.html("I hate that I want you <br> you want her you need her <br> and I will never be her D:")
-    var dankMlGBeats = new Audio("ilybae.wav");
+    var dankMlGBeats = new Audio("Audio/ilybae.wav");
     dankMlGBeats.play()
     return
   }
@@ -1073,24 +1140,34 @@ function light3Change(command) {
   if (isHowAreYou > -1) {
     var feelingFlirty = Math.floor(Math.random() * 10)
     if (feelingFlirty == 6) {
+      var bobTalks = new Audio("Audio/ImDoingGoodNowThatYoureHere.mp3")
+      bobTalks.play()
       output.html("I'm doing good. . . now that you're here ;)")
+      return
     } else {
+      var bobTalks = new Audio("Audio/ImDoingDandylicious.mp3")
+      bobTalks.play()
     output.html("I'm doing dandylicious")
+    return
   }
   }
   var isSavage = entry.indexOf(" savage")
   if (isSavage > -1) {
+    var bobTalks = new Audio("Audio/NobodyIsAsSavageAsMe.mp3")
+    bobTalks.play()
     output.html("Nobody is as savage as me")
     return
   }
   var isCool = entry.indexOf(" cool")
   if (isCool > -1) {
+    var bobTalks = new Audio("Audio/SuperCool.mp3")
+    bobTalks.play()
     output.html("Super Cool!")
   }
   var isFriend = entry.indexOf(" friend")
   if (isFriend > -1) {
     output.html("You are not my friend, you are my brother, my friend.")
-    var MyFren = new Audio("myFren.wav")
+    var MyFren = new Audio("Audio/myFren.wav")
     MyFren.play()
   }
   //HOW ARE YOU RESPONSE----------------------------------------
@@ -1100,39 +1177,65 @@ function light3Change(command) {
   var isSad = entry.indexOf(" sad")
   var positivehauresponse = ["That's good to hear!", "Great!","Alrighty then"];
   var negitivehauresponse = ["Sorry to hear that","That sucks. . ."];
+  var positiveVoiceResponse = ["ThatsGoodToHear.mp3","Great.mp3","AlrightyThen.mp3"]
+  var negitiveVoiceResponse = ["SorryToHearThat.mp3","ThatSucks.mp3"]
   var randomNumber4 = Math.floor(Math.random() * 3)
   var randomNumber5 = Math.floor(Math.random() * 2)
   if (negitvity == "true") {
     if (isGood > -1) {
+      var response_voice = negitiveVoiceResponse[randomNumber5]
+      var bobTalks = new Audio("Audio/" + response_voice)
+      bobTalks.play()
      output.html(negitivehauresponse[randomNumber5])
      return
    }
    if (isFine > -1) {
+     var response_voice = negitiveVoiceResponse[randomNumber5]
+     var bobTalks = new Audio("Audio/" + response_voice)
+     bobTalks.play()
      output.html(negitivehauresponse[randomNumber5])
      return
    }
    if (isBad > -1) {
+     var response_voice = positiveVoiceResponse[randomNumber4]
+     var bobTalks = new Audio("Audio/" + response_voice)
+     bobTalks.play()
      output.html(positivehauresponse[randomNumber4])
      return
    }
    if (isSad > -1) {
+     var response_voice = positiveVoiceResponse[randomNumber4]
+     var bobTalks = new Audio("Audio/" + response_voice)
+     bobTalks.play()
      output.html(positivehauresponse[randomNumber4])
      return
    }
  } else {
    if (isGood > -1) {
+     var response_voice = positiveVoiceResponse[randomNumber4]
+     var bobTalks = new Audio("Audio/" + response_voice)
+     bobTalks.play()
     output.html(positivehauresponse[randomNumber4])
     return
   }
   if (isFine > -1) {
+    var response_voice = positiveVoiceResponse[randomNumber4]
+    var bobTalks = new Audio("Audio/" + response_voice)
+    bobTalks.play()
     output.html(positivehauresponse[randomNumber4])
     return
   }
   if (isBad > -1) {
+    var response_voice = negitiveVoiceResponse[randomNumber5]
+    var bobTalks = new Audio("Audio/" + response_voice)
+    bobTalks.play()
     output.html(negitivehauresponse[randomNumber5])
     return
   }
   if (isSad > -1) {
+    var response_voice = negitiveVoiceResponse[randomNumber5]
+    var bobTalks = new Audio("Audio/" + response_voice)
+    bobTalks.play()
     output.html(negitivehauresponse[randomNumber5])
     return
   }
@@ -1140,10 +1243,14 @@ function light3Change(command) {
   //Thanks ----------------------------------------------------------------
   var isThanks = entry.indexOf(" thanks")
   if (isThanks > -1) {
+    var bobTalks = new Audio("Audio/YoureWelcome.mp3")
+    bobTalks.play()
     output.html("you're welcome!")
   }
   var isThankYou = entry.indexOf(" thank you")
   if (isThankYou > -1) {
+    var bobTalks = new Audio("Audio/YoureWelcome.mp3")
+    bobTalks.play()
     output.html("you're welcome!")
   }
   //WHAT ------------------------------------------------------------------
@@ -1157,6 +1264,8 @@ function light3Change(command) {
       var problem = entry.split("what is ")[1]
       var numbersToMultiply = problem.split("*")
       var answer = (parseInt(numbersToMultiply[0]) * parseInt(numbersToMultiply[1]))
+      var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+      bobTalks.play()
       output.html(entry + " is equal to " + answer)
       return
     }
@@ -1164,6 +1273,8 @@ function light3Change(command) {
       var problem = entry.split("what is ")[1]
       var numbersToAdd = problem.split("+")
       var answer = (parseInt(numbersToAdd[0]) + parseInt(numbersToAdd[1]))
+      var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+      bobTalks.play()
       output.html(entry + " is equal to " + answer)
       return
     }
@@ -1171,13 +1282,17 @@ function light3Change(command) {
       var problem = entry.split("what is ")[1]
       var numbersToSubtract = problem.split("-")
       var answer = (parseInt(numbersToSubtract[0]) - parseInt(numbersToSubtract[1]))
+      var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+      bobTalks.play()
       output.html(entry + " is equal to " + answer)
       return
     }
     if (isDivide > -1) {
       var problem = entry.split("what is ")[1]
       var numbersToDivide = problem.split("/")
-      var answer = (parseInt(numbersToDivide[0]) + parseInt(numbersToDivide[1]))
+      var answer = (parseInt(numbersToDivide[0]) / parseInt(numbersToDivide[1]))
+      var bobTalks = new Audio("Audio/MathHasBeenComputed.mp3")
+      bobTalks.play()
       output.html(entry + " is equal to " + answer)
       return
     }
@@ -1206,7 +1321,7 @@ function light3Change(command) {
     }
     if (isLoveis > -1) {
       output.html("baby don't hurt me")
-      var sickTrack = new Audio("WhatIsLove.wav")
+      var sickTrack = new Audio("Audio/WhatIsLove.wav")
       sickTrack.play()
       return
 
@@ -1232,6 +1347,8 @@ function light3Change(command) {
     if (isAboutBob > -1) {
       var isName = entry.indexOf("name")
       if (isName > -1) {
+        var bobTalks = new Audio("Audio/MyNameIsBotBob.mp3")
+        bobTalks.play()
         output.html("My name is bot Bob")
         memory = "My name is bot Bob"
         return "ur mom"
@@ -1243,11 +1360,15 @@ function light3Change(command) {
         isFood = entry.indexOf(" food")
         if (isLeast > -1) {
           if (isColor > -1) {
+            var bobTalks = new Audio("Audio/Cornsilk.mp3")
+            bobTalks.play()
             output.html("Cornsilk")
             memory = "Cornsilk"
             return "chip is lmae"
           }
           if (isFood > -1) {
+            var bobTalks = new Audio("Audio/Corn.mp3")
+            bobTalks.play()
             output.html("Corn")
             memory = "Corn"
 
@@ -1255,6 +1376,8 @@ function light3Change(command) {
           }
         }
         if (isColor > -1) {
+          var bobTalks = new Audio("Audio/MyFavoriteColorIsSmaragdine.mp3")
+          bobTalks.play()
           output.html("My favorite color is smaragdine")
           memory = "My favorite color is smaragdine"
           setTimeout(function() {
@@ -1264,6 +1387,8 @@ function light3Change(command) {
           return "ur a bot"
         }
         if (isFood > -1) {
+          var bobTalks = new Audio("Audio/TheFleshOfMyFallenEnemies.mp3")
+          bobTalks.play()
           output.html("the flesh of my fallen enemies")
           memory = "the flesh of my fallen enemies"
           setTimeout(function() {
@@ -1275,6 +1400,8 @@ function light3Change(command) {
       }
     }
     if (isWhatQuestion == 0) {
+      var bobTalks = new Audio("Audio/Searching.mp3")
+      bobTalks.play()
     openInNewTab("https://www.google.com/search?q=" + entry)
     output.html("searching . . .")
     return
@@ -1282,42 +1409,56 @@ function light3Change(command) {
   }
   var isWhyQuestion = entry.indexOf(" why ")
   if (isWhyQuestion == 0) {
+    var bobTalks = new Audio("Audio/Searching.mp3")
+    bobTalks.play()
     openInNewTab("https://www.google.com/search?q=" + entry)
     output.html("searching . . .")
     return
   }
   var isWhoQuestion = entry.indexOf(" who ")
   if (isWhoQuestion == 0) {
+    var bobTalks = new Audio("Audio/Searching.mp3")
+    bobTalks.play()
     openInNewTab("https://www.google.com/search?q=" + entry)
     output.html("searching . . .")
     return
   }
   var isWhereQuestion = entry.indexOf(" where ")
   if (isWhereQuestion == 0) {
+    var bobTalks = new Audio("Audio/Searching.mp3")
+    bobTalks.play()
     openInNewTab("https://www.google.com/search?q=" + entry)
     output.html("searching . . .")
     return
   }
   var isHowQuestion = entry.indexOf(" how ")
   if (isHowQuestion == 0) {
+    var bobTalks = new Audio("Audio/Searching.mp3")
+    bobTalks.play()
     openInNewTab("https://www.google.com/search?q=" + entry)
     output.html("searching . . .")
     return
   }
   var isIsQuestion = entry.indexOf(" is ")
   if (isIsQuestion == 0) {
+    var bobTalks = new Audio("Audio/Searching.mp3")
+    bobTalks.play()
     openInNewTab("https://www.google.com/search?q=" + entry)
     output.html("searching . . .")
     return
   }
   var isWhy = entry.indexOf(" why")
   if (isWhy > -1) {
+    var bobTalks = new Audio("Audio/BeacuseISaidSo.mp3")
+    bobTalks.play()
     output.html("Because I said so.")
     return
   }
   if (displayChat == "false") {
     if (output.html() == "") {
       output.html("I didn't get that. . . I'm not very smart <br> please yell at Jack to report a problem ")
+      var bobTalks = new Audio("Audio/IDidntGetThat.mp3")
+      bobTalks.play()
       memory = "Sorry, I didn't get that . . . <br> please email jacbras@nuevaschool.org to report a problem"
     }
   } else {
@@ -1328,8 +1469,9 @@ var thing = "xDDDDDlmaololxDDDPAT"
 var fishyness = "null"
 
 
-var commands2 = {
+var commands = {
   'hey bob *thing': function(thing) {
+    clicker.css("background-color","yellow")
    var isGoTo = thing.indexOf("go to ")
    if (isGoTo > -1) {
       var placeThatGoingTo = thing.split("go to ")[1]
@@ -1340,7 +1482,7 @@ var commands2 = {
 }
 }
 
-annyang.addCommands(commands2);
+annyang.addCommands(commands);
 annyang.start()
 
 
