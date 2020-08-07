@@ -622,7 +622,7 @@ function light3Change(command) {
   }
   //PICKFAIR
   var isPickfair = entry.indexOf(" imhavingfunwithbotbob")
-  if (isPickfar > -1) {
+  if (isPickfair > -1) {
    output.html("I'm glad you're having fun with bot bob! I'm jack and I'm from the bay area, CA. Bot bob was my first ever programming project in 9th grade who still, in an updated form, serves as my personal assistant to this day. I make and play all kinds of different games and love games with overly convoluted and intricate lore.");
   }
   //CHANGE -------------------------------------------------------------------
